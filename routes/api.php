@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,19 @@ Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout']);
+});
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::prefix('products')->group(function () {
+        Route::get(
+            '/',
+            [ProductController::class, 'index']
+        );
+        Route::post(
+            '/',
+            [ProductController::class, 'store']
+        );
+    });
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

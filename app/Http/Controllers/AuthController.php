@@ -39,7 +39,8 @@ class AuthController extends Controller
             'token' => $token,
         ]);
     }
-    public function logout(Request $request)
+    
+    public function logout()
     {
         Auth::logout();
 
@@ -51,14 +52,13 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        // Validação dos dados recebidos
+        // Validate User
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
 
-        // Se a validação falhar, retorna uma resposta JSON com os erros
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
@@ -67,14 +67,13 @@ class AuthController extends Controller
             ], 422);
         }
 
-        // Cria um novo usuário
+        // Create User
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
 
-        // Retorna uma resposta JSON com os dados do usuário criado
         return response()->json([
             'status' => true,
             'message' => 'Success',
