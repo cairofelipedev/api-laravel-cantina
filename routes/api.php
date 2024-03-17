@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,13 @@ Route::middleware(['auth:api'])->group(function () {
         Route::post(
             '/',
             [ProductController::class, 'store']
+        );
+    });
+
+    Route::prefix('orders')->group(function () {
+        Route::post(
+            '/',
+            [OrderController::class, 'store']
         );
     });
 });
