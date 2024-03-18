@@ -39,7 +39,7 @@ class AuthController extends Controller
             'token' => $token,
         ]);
     }
-    
+
     public function logout()
     {
         Auth::logout();
@@ -76,7 +76,7 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Success',
+            'message' => 'success',
             'user' => $user,
         ], 201);
     }

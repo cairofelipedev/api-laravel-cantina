@@ -35,10 +35,7 @@ class OrderControllerTest extends TestCase
             ]
         ];
 
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-            'Accept' => 'application/json',
-        ])->json('POST', '/api/orders', $data);
+        $response = AuthUtils::authenticatedJsonRequest($this, $token, '/api/orders', $data, 'POST');
 
         $response->assertStatus(200);
     }

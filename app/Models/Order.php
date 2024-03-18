@@ -9,13 +9,13 @@ class Order extends Model
 {
     use HasFactory;
 
-    public function orderItems()
+    public function items()
     {
         return $this->hasMany(OrderItem::class);
     }
 
-    public function getTotalAttribute()
+    public function total_items()
     {
-        return $this->orderItems->sum('total');
+        return $this->items->sum('total');
     }
 }

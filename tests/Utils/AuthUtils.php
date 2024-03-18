@@ -26,4 +26,12 @@ class AuthUtils
 
         return $response->json('token');
     }
+
+    public static function authenticatedJsonRequest(TestCase $testCase, string $token, string $endpoint, array $data, string $method)
+    {
+        return $testCase->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json',
+        ])->json($method, $endpoint, $data);
+    }
 }

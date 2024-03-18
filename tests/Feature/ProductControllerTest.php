@@ -22,10 +22,7 @@ class ProductControllerTest extends TestCase
             'price' => 10.99,
         ];
 
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-            'Accept' => 'application/json',
-        ])->json('POST', '/api/products', $data);
+        $response = AuthUtils::authenticatedJsonRequest($this, $token, '/api/products', $data, 'POST');
 
         $response->assertStatus(200)
             ->assertJson(['status' => 'success']);

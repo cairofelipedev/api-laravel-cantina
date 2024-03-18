@@ -33,9 +33,21 @@ Route::middleware(['auth:api'])->group(function () {
             '/',
             [ProductController::class, 'store']
         );
+        Route::put(
+            '/{id}',
+            [ProductController::class, 'update']
+        );
+        Route::delete(
+            '/{id}',
+            [ProductController::class, 'destroy']
+        );
     });
 
     Route::prefix('orders')->group(function () {
+        Route::get(
+            '/',
+            [OrderController::class, 'index']
+        );
         Route::post(
             '/',
             [OrderController::class, 'store']
