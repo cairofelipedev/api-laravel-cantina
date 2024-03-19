@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "API Cantina",
-        "description": "Descrição da sua API",
+        "description": "Desenvolvimento de API para uma Cantina Escolar utilizando Laravel e MySQL.",
         "contact": {
             "name": "Nome do Contato",
             "email": "seu@email.com"
@@ -15,11 +15,98 @@
     },
     "paths": {
         "/api/auth/login": {
-            "get": {
-                "operationId": "3f6f5edea861ea0d9135e407b6235113",
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Autenticação do usuário",
+                "description": "Autentica um usuário na aplicação.",
+                "operationId": "154e9ec8fc34acb86c3cbdbcebbd7a7c",
+                "requestBody": {
+                    "description": "Dados de autenticação do usuário",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "usuario@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "senha123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
-                        "description": "An example endpoint"
+                        "description": "Usuário autenticado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9..."
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "Bearer"
+                                        },
+                                        "expires_in": {
+                                            "type": "integer",
+                                            "example": "3600"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Usuário de Exemplo"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "format": "email",
+                                                    "example": "usuario@example.com"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Credenciais inválidas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Credenciais inválidas."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
