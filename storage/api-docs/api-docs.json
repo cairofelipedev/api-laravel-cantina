@@ -149,6 +149,34 @@
                 }
             }
         },
+        "/api/orders/{id}": {
+            "get": {
+                "tags": [
+                    "Pedidos"
+                ],
+                "summary": "Exibir um pedido específico",
+                "operationId": "3240d5fbf0e62dc79f46618c147155f5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do pedido",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Exibir um pedido específico"
+                    },
+                    "404": {
+                        "description": "Pedido não encontado"
+                    }
+                }
+            }
+        },
         "/api/products": {
             "get": {
                 "tags": [
