@@ -64,4 +64,36 @@ class OrderController extends Controller
 
         return response()->json(['message' => 'Order create', 'order_id' => $order->id]);
     }
+
+    public function show($id)
+    {
+        $order = Order::with('items.product')->find($id);
+
+        if (!$order) {
+            return response()->json(['message' => 'Order not found'], 404);
+        }
+
+        $total = $order->items->sum(function ($item) {
+            return $item->quantity * $item->product->price;
+        });
+
+        $items = $order->items->map(function ($item) {
+            return [
+                'product_id' => $item->product_id,
+                'quantity' => $item->quantity,
+                'price' => $item->product->price,
+                'total' => $item->quantity * $item->product->price,
+                'product_name' => $item->product->name,
+                'product_description' => $item->product->description,
+            ];
+        });
+
+        $results = [
+            'order_id' => $order->id,
+            'total' => $total,
+            'items' => $items,
+        ];
+
+        return response()->json($results);
+    }
 }

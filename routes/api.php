@@ -33,6 +33,10 @@ Route::middleware(['auth:api'])->group(function () {
             '/',
             [ProductController::class, 'store']
         );
+        Route::get(
+            '/{id}',
+            [ProductController::class, 'show']
+        );
         Route::put(
             '/{id}',
             [ProductController::class, 'update']
@@ -52,9 +56,9 @@ Route::middleware(['auth:api'])->group(function () {
             '/',
             [OrderController::class, 'store']
         );
+        Route::get(
+            '/{id}',
+            [OrderController::class, 'show']
+        );
     });
-});
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
 });

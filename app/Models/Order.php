@@ -16,6 +16,6 @@ class Order extends Model
 
     public function total_items()
     {
-        return $this->items->sum('total');
+        return $this->items()->sum('total');
     }
 }
