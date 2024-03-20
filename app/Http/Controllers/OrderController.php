@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
@@ -42,11 +43,16 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'items' => 'required|array',
+        $validator = Validator::make($request->all(), [
+            'items' => 'required|array|min:1',
             'items.*.product_id' => 'required|exists:products,id',
             'items.*.quantity' => 'required|integer|min:1',
         ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
 
         // Create Order
         $order = Order::create([]);

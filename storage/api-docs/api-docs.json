@@ -4,8 +4,8 @@
         "title": "API Cantina",
         "description": "Desenvolvimento de API para uma Cantina Escolar utilizando Laravel e MySQL.",
         "contact": {
-            "name": "Nome do Contato",
-            "email": "seu@email.com"
+            "name": "Cairo Felipe",
+            "email": "cairoflipedev@gmail.com"
         },
         "license": {
             "name": "Licença",
@@ -141,10 +141,49 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Pedido criado com sucesso"
+                        "description": "Pedido criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "422": {
-                        "description": "Erro de validação"
+                        "description": "Erros",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation error"
+                                        },
+                                        "erros": {
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Error"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -169,7 +208,59 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Exibir um pedido específico"
+                        "description": "Detalhes do pedido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "order_id": {
+                                            "type": "integer",
+                                            "example": "2"
+                                        },
+                                        "total": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": "24.2"
+                                        },
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "product_id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "quantity": {
+                                                        "type": "integer",
+                                                        "example": "2"
+                                                    },
+                                                    "price": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "12.10"
+                                                    },
+                                                    "total": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "24.2"
+                                                    },
+                                                    "product_name": {
+                                                        "type": "string",
+                                                        "example": "Teste"
+                                                    },
+                                                    "product_description": {
+                                                        "type": "string",
+                                                        "example": "teste"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Pedido não encontado"
@@ -186,7 +277,40 @@
                 "operationId": "e6f76ba38d091e755d163b41a92642f3",
                 "responses": {
                     "200": {
-                        "description": "Listar todos os produtos"
+                        "description": "Listagem de produtos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Nome Produto 1"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Descrição do Produto"
+                                        },
+                                        "price": {
+                                            "type": "integer",
+                                            "example": "10.2"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2024-03-19T16:55:45"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2024-03-19T16:55:45"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -222,10 +346,49 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Produto criado com sucesso"
+                        "description": "Produto Criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "422": {
-                        "description": "Erro de validação"
+                        "description": "Erros",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation error"
+                                        },
+                                        "erros": {
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Error"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -300,10 +463,49 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Produto atualizado com sucesso"
+                        "description": "Produto atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
-                    "404": {
-                        "description": "Produto não encontrado"
+                    "422": {
+                        "description": "Erros",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation error"
+                                        },
+                                        "erros": {
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Error"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             },

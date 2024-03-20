@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -15,11 +16,20 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
             'description' => 'nullable',
             'price' => 'required|numeric|min:0',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
 
         $product = Product::create($request->all());
         return response()->json(['status' => 'success', 'data' => $product]);
@@ -41,11 +51,19 @@ class ProductController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Product not found'], 404);
         }
 
-        $request->validate([
-            'name' => 'required',
+        $validator = Validator::make($request->all(), [
+            'name' => 'string|max:255',
             'description' => 'nullable',
-            'price' => 'required|numeric|min:0',
+            'price' => 'numeric|min:0',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
 
         $product->update($request->all());
         return response()->json(['status' => 'success', 'message' => 'Product updated successfully']);

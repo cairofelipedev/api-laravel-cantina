@@ -7,7 +7,18 @@ namespace App\Annotations;
  *     path="/api/products",
  *     summary="Listar todos os produtos",
  *     tags={"Produtos"},
- *     @OA\Response(response="200", description="Listar todos os produtos"),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Listagem de produtos",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="id", type="integer", example="1"),
+ *             @OA\Property(property="name", type="string", example="Nome Produto 1"),
+ *             @OA\Property(property="description", type="string", example="Descrição do Produto"),
+ *             @OA\Property(property="price", type="integer", example="10.2"),
+ *             @OA\Property(property="created_at", type="string", example="2024-03-19T16:55:45"),
+ *             @OA\Property(property="updated_at", type="string", example="2024-03-19T16:55:45"),
+ *         )
+ *     ),
  * )
  * 
  * @OA\Post(
@@ -22,8 +33,24 @@ namespace App\Annotations;
  *             @OA\Property(property="price", type="number", format="float", example="10.99"),
  *         )
  *     ),
- *     @OA\Response(response="200", description="Produto criado com sucesso"),
- *     @OA\Response(response="422", description="Erro de validação"),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Produto Criado com sucesso",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="status", type="string", example="success"),
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=422,
+ *         description="Erros",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="status", type="boolean", example="false"),
+ *             @OA\Property(property="message", type="string", example="Validation error"),
+ *             @OA\Property(property="erros", type="object",
+ *                 @OA\Property(property="error", type="string", example="Error"),
+ *             )
+ *         )
+ *     )
  * )
  * 
  * @OA\Get(
@@ -60,8 +87,24 @@ namespace App\Annotations;
  *             @OA\Property(property="price", type="number", format="float", example="15.99"),
  *         )
  *     ),
- *     @OA\Response(response="200", description="Produto atualizado com sucesso"),
- *     @OA\Response(response="404", description="Produto não encontrado"),
+ *    @OA\Response(
+ *         response=200,
+ *         description="Produto atualizado com sucesso",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="status", type="string", example="success"),
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=422,
+ *         description="Erros",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="status", type="boolean", example="false"),
+ *             @OA\Property(property="message", type="string", example="Validation error"),
+ *             @OA\Property(property="erros", type="object",
+ *                 @OA\Property(property="error", type="string", example="Error"),
+ *             )
+ *         )
+ *     )
  * )
  * 
  * @OA\Delete(

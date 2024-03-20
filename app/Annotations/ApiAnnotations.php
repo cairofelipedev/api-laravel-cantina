@@ -8,8 +8,8 @@ namespace App\Annotations;
  *     version="1.0.0",
  *     description="Desenvolvimento de API para uma Cantina Escolar utilizando Laravel e MySQL.",
  *     @OA\Contact(
- *         email="seu@email.com",
- *         name="Nome do Contato"
+ *         email="cairoflipedev@gmail.com",
+ *         name="Cairo Felipe"
  *     ),
  *     @OA\License(
  *         name="Licença",
